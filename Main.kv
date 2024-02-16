@@ -1,0 +1,149 @@
+MDScreen:
+
+
+    MDFloatLayout:
+        size: root.width, root.height        
+        
+        MDCard:
+            size_hint: 0.95, 0.95
+            background_color: "White"
+            pos_hint: {'center_x': 0.5,'center_y': 0.5}
+            id: card
+            md_bg_color: 
+        
+            MDFloatLayout:
+
+                MDLabel:
+                    text: "WoawSize"
+                    font_size: sp(24)
+                    pos_hint: {"x": .335, "y": .4}
+
+                MDLabel:
+                    text: "Position Size: "
+                    id: position_size_label
+                    pos_hint: {"x": .1, "top": .945}
+                    font_color: "white"
+                    font_size: sp(14)
+
+                MDLabel:
+                    text:"Risk To Reward:"
+                    id: r_to_r_label
+                    pos_hint: {"x": .1, "top": .845}
+                    font_size: sp(14)
+
+                MDRectangleFlatIconButton:
+                    text:"Long"
+                    icon: "arrow-up-bold"
+                    text_color: "white"
+                    line_color: "green"
+                    theme_icon_color: "Custom"
+                    icon_color: "green"
+                    size_hint: .35, .005
+                    size: root.width * 0.3, root.height * 0.05
+                    pos_hint: {"x": .1, "top": .235}
+                    on_release: app.long_trade()
+
+                MDTextField:
+                    hint_text: "Account Size"
+                    id: account_size
+                    pos_hint: {"x": .1, "top": .8}
+                    size_hint: 0.3, 0.05
+                    font_size: sp(14)
+                    font_size_hint_text: sp(14)
+                    mode:"round"
+                    padding: (0, 0, 0, 23)
+                    input_filter: "float"
+                    input_type: "number"
+
+                MDTextField:
+                    hint_text: "Entry Price"
+                    id: entry_price
+                    pos_hint: {"x": .1, "top": .7}
+                    size_hint: 0.3, 0.05
+                    font_size: sp(14)
+                    font_size_hint_text: sp(14)
+                    mode:"round"
+                    input_filter: "float"
+                    input_type: "number"
+
+                MDTextField:
+                    hint_text: "Multiplier"
+                    id: multiplier
+                    pos_hint: {"x": .1, "top": .6}
+                    size_hint: 0.3, 0.05
+                    font_size: sp(14)
+                    font_size_hint_text: sp(14)
+                    mode:"round"
+                    input_filter: "float"
+                    input_type: "number"
+
+                MDLabel:
+                    text: "Dollar Amount: "
+                    id: dollar_amount_label
+                    pos_hint: {"x": .55, "top": .945}
+                    font_size: sp(14)
+
+                MDRoundFlatButton:
+                    text:"Clear All Fields"
+                    text_color: "white"
+                    md_bg_color: "red"
+                    size_hint: 
+                    pos_hint: {"x": .55, "top": .375}
+                    on_release: app.clear_all()
+
+                MDRectangleFlatIconButton:
+                    text: "Short"
+                    icon: "arrow-down-bold"
+                    text_color: "white"
+                    line_color: "red"
+                    theme_icon_color: "Custom"
+                    icon_color: "red"
+                    size_hint: .35, .005
+                    size: root.width * 0.3, root.height * 0.05
+                    pos_hint: {"x": .55, "top": .235}
+                    on_release: app.short_trade()
+
+                MDTextField:
+                    hint_text: "Risk"
+                    id: risk_percentage
+                    pos_hint: {"right": .85, "top": .8}
+                    size_hint: 0.3, 0.05
+                    font_size: sp(14)
+                    font_size_hint_text: sp(14)
+                    mode:"round"
+                    padding: (0, 0, 0, 23)
+                    input_filter: "float"
+                    input_type: "number"
+
+                MDTextField:
+                    hint_text: "Stop Loss"
+                    id: stoploss
+                    pos_hint: {"right": .85, "top": .7}
+                    size_hint: 0.3, 0.05
+                    font_size: sp(14)
+                    font_size_hint_text: sp(14)
+                    mode:"round"
+                    input_filter: "float"
+                    input_type: "number"
+
+                MDTextField:
+                    hint_text: "Take Profit"
+                    id: takeprofit
+                    pos_hint: {"right": .85, "top": .6}
+                    size_hint: 0.3, 0.05
+                    font_size: sp(14)
+                    font_size_hint_text: sp(14)
+                    mode:"round"
+                    input_filter: "float"
+                    input_type: "number"
+
+                
+            
+
+                
+
+
+
+                    
+
+                
