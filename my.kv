@@ -1,0 +1,281 @@
+#: import get_color_from_hex kivy.utils.get_color_from_hex
+
+# Create main md screen
+MDScreen:
+
+    # create variables to get slider values in python code
+    risk_percentage_text: risk_percentage 
+    multiplier_text: multiplier
+
+    # create bottom navigation items       
+    MDBottomNavigation:
+        panel_color: get_color_from_hex("#ffffff")
+        text_color_normal: get_color_from_hex("#bcbcbc")
+        text_color_active: get_color_from_hex("#000000")
+        
+        # create first bottom navigation page -> calculate
+        MDBottomNavigationItem:
+            text_color_active: "#ffffff"
+            name: "calculate"
+            text: "Calculate"
+            icon: "calculator"
+
+            # add box layout to add first card           
+            MDFloatLayout:
+                size: root.width, root.height 
+                
+                # Add primary card that will hold all other elements
+                MDCard:
+                    size_hint: 0.9, 0.65
+                    pos_hint: {'center_x': 0.5,'top': 0.9}
+                    id: main_card
+                    md_bg_color: "white"
+                    style: "elevated"     
+
+                    # Add a float layout inside of this main card for all buttons and input fields                    
+                    MDFloatLayout:
+                        size: self.parent.width, self.parent.height 
+                        
+                        # Create card to create border around input field
+                        MDCard:
+                            size_hint: 0.9, 0.1
+                            pos_hint: {'center_x': 0.5,'top': 0.9}
+                            md_bg_color: "white"
+                            style: "elevated"
+                            
+                            # Add MD textfield for Account Size inside the card
+                            MDTextField:
+                                id: account_size
+                                size_hint: 1, 1
+                                font_name: "Inter"
+                                font_size: dp(12)
+                                input_filter: "float" # only allow flow - no letters or symbols
+                                input_type: "number" # open android numpad keyboard
+                                pos_hint: {"center_X": 0.0, "top": 0.999}
+                                hint_text_font_name: "Inter"
+                                hint_text: "Account Size"
+                                hint_text_color_normal: get_color_from_hex("#938383")
+                                hint_text_color_focus: get_color_from_hex("#938383")
+                                text_color_focus: "black"
+                                text_color_normal: get_color_from_hex("#938383")
+                                text_halign: "center"
+                                mode: "rectangle"
+                                line_color_focus: get_color_from_hex("#ffffff")
+
+                        # Create card to create border around risk input field
+                        MDCard:
+                            size_hint: 0.2, 0.1
+                            pos_hint: {'center_x': 0.15,'top': 0.75}
+                            md_bg_color: "white"
+                            style: "elevated"
+                            
+                            # Add MD textfield for Account Size inside the card
+                            MDTextField:
+                                id: risk_percentage
+                                text: "2" # defualt value
+                                size_hint: 1, 1
+                                font_name: "Inter"
+                                font_size: dp(12)
+                                input_filter: "float" # only allow flow - no letters or symbols
+                                input_type: "number" # open android numpad keyboard
+                                pos_hint: {"center_X": 0.0, "top": 0.999}
+                                hint_text_font_name: "Inter"
+                                hint_text: "Risk"
+                                hint_text_color_normal: get_color_from_hex("#938383")
+                                hint_text_color_focus: get_color_from_hex("#938383")
+                                text_color_focus: "black"
+                                text_color_normal: get_color_from_hex("#938383")
+                                text_halign: "center"
+                                mode: "rectangle"
+                                line_color_focus: get_color_from_hex("#ffffff")
+
+                        MDSlider:
+                            id: risk_slider
+                            min:1 # set min value to 1
+                            max: 11 # set max value to 10
+                            pos_hint: {'center_x': 0.6,'y': 0.66}
+                            size_hint: 0.7, 0.075
+                            value: 2 # set standard to 2
+                            color: "black"
+                            thumb_color_inactive: get_color_from_hex("#938383")
+                            thumb_color_active: "black"
+                            hint_font_name: "Inter"
+                            hint_text_color: get_color_from_hex("#938383")
+                            on_value: app.get_risk_slider_value(*args) # when slider is moved call function and pass slider and value 
+
+                        # Create card to create border around multiplier input field
+                        MDCard:
+                            size_hint: 0.2, 0.1
+                            pos_hint: {'center_x': 0.15,'top': 0.6}
+                            md_bg_color: "white"
+                            style: "elevated"
+                            
+                            # Add MD textfield for Account Size inside the card
+                            MDTextField:
+                                id: multiplier
+                                text: "1" #default value
+                                size_hint: 1, 1
+                                font_name: "Inter"
+                                font_size: dp(12)
+                                input_filter: "float" # only allow flow - no letters or symbols
+                                input_type: "number" # open android numpad keyboard
+                                pos_hint: {"center_X": 0.0, "top": 0.999}
+                                hint_text_font_name: "Inter"
+                                hint_text: "Multiplier"
+                                hint_text_color_normal: get_color_from_hex("#938383")
+                                hint_text_color_focus: get_color_from_hex("#938383")
+                                text_color_focus: "black"
+                                text_color_normal: get_color_from_hex("#938383")
+                                text_halign: "center"
+                                mode: "rectangle"
+                                line_color_focus: get_color_from_hex("#ffffff")
+
+                        MDSlider:
+                            id: multiplier_slider
+                            min: 1 # set min value to 1
+                            max: 101 # set max value to 100
+                            pos_hint: {'center_x': 0.6,'y': 0.51}
+                            size_hint: 0.7, 0.075
+                            value: 1 # set standard to 2
+                            color: "black"
+                            thumb_color_inactive: get_color_from_hex("#938383")
+                            thumb_color_active: "black"
+                            hint_font_name: "Inter"
+                            hint_text_color: get_color_from_hex("#938383")
+                            on_value: app.get_multiplier_slider_value(*args) # when slider is moved call function and pass slider and value 
+                        
+                    # Create card to create border around entry price input field
+                        MDCard:
+                            size_hint: 0.4, 0.1
+                            pos_hint: {'center_x': 0.25,'top': 0.45}
+                            md_bg_color: "white"
+                            style: "elevated"
+                            
+                            # Add MD textfield for Account Size inside the card
+                            MDTextField:
+                                id: entry_price
+                                size_hint: 1, 1
+                                font_name: "Inter"
+                                font_size: dp(12)
+                                input_filter: "float" # only allow flow - no letters or symbols
+                                input_type: "number" # open android numpad keyboard
+                                pos_hint: {"center_X": 0.0, "top": 0.999}
+                                hint_text_font_name: "Inter"
+                                hint_text: "Entry Price"
+                                hint_text_color_normal: get_color_from_hex("#938383")
+                                hint_text_color_focus: get_color_from_hex("#938383")
+                                text_color_focus: "black"
+                                text_color_normal: get_color_from_hex("#938383")
+                                text_halign: "center"
+                                mode: "rectangle"
+                                line_color_focus: get_color_from_hex("#ffffff")     
+
+                        # Create card to create border around stoploss price input field
+                        MDCard:
+                            size_hint: 0.4, 0.1
+                            pos_hint: {'center_x': 0.72,'top': 0.45}
+                            md_bg_color: "white"
+                            style: "elevated"
+                            
+                            # Add MD textfield for Account Size inside the card
+                            MDTextField:
+                                id: stoploss
+                                size_hint: 1, 1
+                                font_name: "Inter"
+                                font_size: dp(12)
+                                input_filter: "float" # only allow flow - no letters or symbols
+                                input_type: "number" # open android numpad keyboard
+                                pos_hint: {"center_X": 0.0, "top": 0.999}
+                                hint_text_font_name: "Inter"
+                                hint_text: "Stoploss"
+                                hint_text_color_normal: get_color_from_hex("#938383")
+                                hint_text_color_focus: get_color_from_hex("#938383")
+                                text_color_focus: "black"
+                                text_color_normal: get_color_from_hex("#938383")
+                                text_halign: "center"
+                                mode: "rectangle"
+                                line_color_focus: get_color_from_hex("#ffffff")   
+                       
+                        # Create card to create border around Take Profit price input field
+                        MDCard:
+                            size_hint: 0.4, 0.1
+                            pos_hint: {'center_x': 0.25,'top': 0.3}
+                            md_bg_color: "white"
+                            style: "elevated"
+                            
+                            # Add MD textfield for Account Size inside the card
+                            MDTextField:
+                                id: takeprofit
+                                size_hint: 1, 1
+                                font_name: "Inter"
+                                font_size: dp(12)
+                                input_filter: "float" # only allow flow - no letters or symbols
+                                input_type: "number" # open android numpad keyboard
+                                pos_hint: {"center_X": 0.0, "top": 0.999}
+                                hint_text_font_name: "Inter"
+                                hint_text: "Take Profit"
+                                hint_text_color_normal: get_color_from_hex("#938383")
+                                hint_text_color_focus: get_color_from_hex("#938383")
+                                text_color_focus: "black"
+                                text_color_normal: get_color_from_hex("#938383")
+                                text_halign: "center"
+                                mode: "rectangle"
+                                line_color_focus: get_color_from_hex("#ffffff") 
+
+                        MDRaisedButton:
+                            text: "Clear All"
+                            font_name: "Inter"
+                            font_size: dp(27)
+                            md_bg_color: "red" 
+                            text_color: "black"
+                            size_hint: 0.4, 0.1
+                            pos_hint: {'center_x': 0.72,'top': 0.3}
+                            on_release: app.clear_all()
+
+                # Add button for long calculations
+                MDRectangleFlatIconButton:
+                    font_name: "Inter"
+                    font_size: dp(27)
+                    text:"Long"
+                    icon: "arrow-up-bold"
+                    text_color: "black"
+                    line_color: "green"
+                    line_width: 2
+                    theme_icon_color: "Custom"
+                    md_bg_color: "white"
+                    icon_color: "green"
+                    size_hint: .75, .075
+                    size: root.width * 0.3, root.height * 0.05
+                    pos_hint: {"x": .13, "top": .225}
+                    on_release: app.long_trade()
+
+                # Add button for short calculations
+                MDRectangleFlatIconButton:
+                    font_name: "Inter"
+                    font_size: dp(27)
+                    text:"Short"
+                    icon: "arrow-down-bold"
+                    text_color: "black"
+                    line_color: "red"
+                    line_width: 2
+                    theme_icon_color: "Custom"
+                    text_halign: "center"
+                    md_bg_color: "white"
+                    icon_color: "red"
+                    size_hint: .75, .075
+                    size: root.width * 0.3, root.height * 0.05
+                    pos_hint: {"x": .13, "top": .130}
+                    on_release: app.short_trade()
+                          
+        MDBottomNavigationItem:
+            name: "history"
+            text: "History"
+            icon: "history"
+
+            MDLabel:
+                text: "Coming Soon!"
+                font_name: "Inter"
+                font_size: dp(50)
+                font_color: "white"
+                color: get_color_from_hex("#938383")
+
